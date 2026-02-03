@@ -2,6 +2,8 @@
 
 A web application that helps users track workouts, set fitness goals, and discover recipes that match their calorie needs. FitFuel provides a simple, all-in-one platform for managing your fitness journey.
 
+🌐 **Live Demo**: [https://fit-fuel.onrender.com/](https://fit-fuel.onrender.com/)
+
 ## Table of Contents
 
 - [Description](#description)
