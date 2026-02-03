@@ -1,0 +1,14 @@
+{
+  "name": "fitfuel",
+  "version": "1.0.0",
+  "description": "FitFuel fitness and nutrition app",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd server && npm run dev",
+    "dev:frontend": "live-server --port=8008 --open=/index.html --ignorePattern=/node_modules/"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "live-server": "^1.2.2"
+  }
+}
