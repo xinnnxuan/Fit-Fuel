@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFuel - Your Fitness & Nutrition Companion</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍎</text></svg>">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/activity.css">
+    <link rel="stylesheet" href="css/feed.css">
+    <link rel="stylesheet" href="css/goals.css">
+    <link rel="stylesheet" href="css/recipes.css">
+    <link rel="stylesheet" href="css/recipe-view.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/settings.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home" class="logo-link">
+                    <img src="logo.png" alt="Fit‑Fuel Logo" class="logo-img">
+                    <span class="brand-name">Fit‑Fuel</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+
+                <div class="nav-signedin" id="nav-signedin" style="display: flex;">
+                    <a href="#dashboard" class="nav-link">Dashboard</a>
+                    <a href="#recipes" class="nav-link" id="recipes-link-signedin">Recipes</a>
+                    <a href="#goals" class="nav-link">Goals</a>
+                    <a href="#activity" class="nav-link">Data</a>
+                </div>
+                <div class="nav-guest" id="nav-guest" style="display: none;">
+                    <a href="#recipes" class="nav-link" id="recipes-link-guest">Recipes</a>
+                        </div>
+                <div class="nav-icons">
+                    <div class="user-dropdown">
+                        <i class="fas fa-user nav-icon" id="user-btn"></i>
+                        <div class="dropdown-menu" id="user-dropdown-menu">
+                            <a href="#" class="dropdown-item" id="profile-link">
+                                <i class="fas fa-user"></i>
+                                Profile
+                            </a>
+                            <a href="#" class="dropdown-item" id="auth-link">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span id="auth-text">Log in</span>
+                            </a>
+                            <a href="#" class="dropdown-item" id="settings-link">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>FUEL YOUR FITNESS JOURNEY</h1>
+                <p>TRACK WORKOUTS, DISCOVER RECIPES, AND ACHIEVE YOUR HEALTH GOALS WITH FITFUEL</p>
+            </div>
+        </section>
+
+
+
+
+        <section id="dashboard" class="social-feed" style="display: none;">
+            <div class="feed-container">
+
+                <div class="feed-sidebar">
+                    <div class="sidebar-icons">
+                        <div class="sidebar-icon" data-filter="recipes">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="sidebar-icon" data-filter="workouts">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="sidebar-icon" data-filter="my-uploads">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="feed-main">
+                    <div class="feed-posts" id="feed-posts">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="profile" class="profile" style="display: none;">
+            <div class="profile-container">
+
+                <div class="profile-main">
+
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h1>NAME</h1>
+                            <p class="location">LOCATION</p>
+                        </div>
+                    </div>
+
+
+                    <div class="profile-nav">
+                        <button class="profile-nav-item active" data-tab="overview">OVERVIEW</button>
+                        <button class="profile-nav-item" data-tab="following">FOLLOWING</button>
+                        <button class="profile-nav-item" data-tab="like">LIKE</button>
+                        <button class="profile-nav-item" data-tab="saved">SAVED</button>
+                    </div>
+
+
+                    <div class="profile-section" id="overview-content" style="display: block;">
+                        <div class="kpi-tiles">
+                            <div class="kpi-tile">
+                                <h3>Calories Burned</h3>
+                                <div class="kpi-value">0</div>
+                            </div>
+                            <div class="kpi-tile">
+                                <h3>Calorie Goal</h3>
+                                <div class="kpi-value">2000</div>
+                            </div>
+                            <div class="kpi-tile">
+                                <h3>Calorie Left</h3>
+                                <div class="kpi-value">-2000</div>
+                            </div>
+                        </div>
+
+
+                        <div class="recipe-recommendations-section">
+                            <div class="recommendations-header">
+                                <h2>RECOMMENDED RECIPES</h2>
+                                <div class="recommendations-period-selector">
+                                    <label for="recommendations-period">Period:</label>
+                                    <select id="recommendations-period" class="period-dropdown">
+                                        <option value="1">1 Day</option>
+                                        <option value="7" selected>1 Week</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="recipe-recommendations-grid" class="recipe-recommendations-grid">
+                                <div class="meal-category">
+                                    <h3 class="meal-category-title">BREAKFAST</h3>
+                                    <div class="meal-recipes-grid" data-meal="breakfast"></div>
+                            </div>
+                                <div class="meal-category">
+                                    <h3 class="meal-category-title">LUNCH</h3>
+                                    <div class="meal-recipes-grid" data-meal="lunch"></div>
+                        </div>
+                                <div class="meal-category">
+                                    <h3 class="meal-category-title">DINNER</h3>
+                                    <div class="meal-recipes-grid" data-meal="dinner"></div>
+                                </div>
+                            </div>
+                            </div>
+
+
+                        <div class="activities-section">
+                            <div class="activity-list">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="profile-section" id="following-content" style="display: none;">
+                        <div class="following-section">
+
+                            <div class="following-dropdown">
+                                <button class="following-dropdown-btn" id="following-dropdown-btn">
+                                    <span>I'm Following</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="following-dropdown-menu" id="following-dropdown-menu"
+                                    style="display: none;">
+                                    <div class="dropdown-item active" data-option="following">I'm Following</div>
+                                    <div class="dropdown-item" data-option="followers">Following Me</div>
+                                    <div class="dropdown-item" data-option="suggestions">Who to Follow</div>
+                                </div>
+                            </div>
+
+
+                            <div class="following-list">
+
+                                <div class="following-item">
+                                    <div class="following-avatar">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face"
+                                            alt="Dalton Dawson">
+                                    </div>
+                                    <div class="following-info">
+                                        <div class="following-name">Dalton Dawson</div>
+                                        <div class="following-location">Spokane, Washington</div>
+                                    </div>
+                                    <button class="following-btn"></button>
+                                </div>
+
+
+                                <div class="following-item">
+                                    <div class="following-avatar">
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face"
+                                            alt="Emma Spence">
+                                    </div>
+                                    <div class="following-info">
+                                        <div class="following-name">Emma Spence</div>
+                                        <div class="following-location">Seattle, Washington</div>
+                                    </div>
+                                    <button class="following-btn"></button>
+                                </div>
+
+
+                                <div class="following-item">
+                                    <div class="following-avatar">
+                                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face"
+                                            alt="Jacob Spence">
+                                    </div>
+                                    <div class="following-info">
+                                        <div class="following-name">Jacob Spence</div>
+                                        <div class="following-location">Spokane, Washington</div>
+                                    </div>
+                                    <button class="following-btn"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="profile-section" id="like-content" style="display: none;">
+                        <div class="profile-filter-bar">
+                            <button class="profile-filter-btn active" data-filter="all" data-tab="like">All</button>
+                            <button class="profile-filter-btn" data-filter="recipes" data-tab="like">Recipes</button>
+                            <button class="profile-filter-btn" data-filter="posts" data-tab="like">Posts</button>
+                        </div>
+                        <div id="like-items-container"></div>
+                    </div>
+
+
+                    <div class="profile-section" id="saved-content" style="display: none;">
+                        <div class="profile-filter-bar">
+                            <button class="profile-filter-btn active" data-filter="all" data-tab="saved">All</button>
+                            <button class="profile-filter-btn" data-filter="recipes" data-tab="saved">Recipes</button>
+                            <button class="profile-filter-btn" data-filter="posts" data-tab="saved">Posts</button>
+                        </div>
+                        <div id="saved-items-container"></div>
+                    </div>
+                </div>
+
+
+                <div class="profile-sidebar">
+
+                    <div class="sidebar-section last-weeks">
+                        <div class="stats-row">
+                            <div class="stat-item">
+                        <div class="total-activities">0</div>
+                        <p class="label">Total Activities</p>
+                            </div>
+                            <div class="stat-item">
+                        <div class="total-recipes">0</div>
+                        <p class="label">Total Recipes</p>
+                            </div>
+                        </div>
+
+
+                        <div class="calendar-days-labels">
+                            <span>M</span>
+                            <span>T</span>
+                            <span>W</span>
+                            <span>T</span>
+                            <span>F</span>
+                            <span>S</span>
+                            <span>S</span>
+                        </div>
+
+                        <div class="activity-calendar">
+
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                        </div>
+
+                        <div class="activity-types">
+                            <div class="activity-type-icon"><i class="fas fa-bicycle"></i></div>
+                            <div class="activity-type-icon"><i class="fas fa-running"></i></div>
+                            <div class="activity-type-icon"><i class="fas fa-swimmer"></i></div>
+                            <div class="activity-type-icon"><i class="fas fa-water"></i></div>
+                            <div class="activity-type-icon"><i class="fas fa-utensils"></i></div>
+                        </div>
+                    </div>
+
+
+                </div>
+        </section>
+
+
+        <section id="activity" class="activity" style="display: none;">
+            <div class="activity-container">
+
+                <div class="activity-sidebar">
+                    <nav class="activity-nav">
+                        <button class="activity-nav-btn active" data-section="manual-input">
+                            <i class="fas fa-edit"></i>
+                            Manual Entry
+                        </button>
+                        <button class="activity-nav-btn" data-section="manual-recipe">
+                            <i class="fas fa-utensils"></i>
+                            Manual Add Recipe
+                        </button>
+                    </nav>
+                </div>
+
+
+                <div class="activity-content">
+
+                    <div id="manual-input-section" class="activity-section active">
+                        <form id="activity-form" class="activity-form">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="distance">Distance</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="distance" name="distance" step="0.01" min="0"
+                                            value="0">
+                                        <select id="distance-unit" name="distanceUnit">
+                                            <option value="kilometers">kilometers</option>
+                                            <option value="miles">miles</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="elevation">Elevation</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="elevation" name="elevation" step="0.1" min="0"
+                                            value="0">
+                                        <select id="elevation-unit" name="elevationUnit">
+                                            <option value="meters">meters</option>
+                                            <option value="feet">feet</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="duration">Duration</label>
+                                    <div class="duration-inputs">
+                                        <input type="number" id="hours" name="hours" min="0" max="23" value="01">
+                                        <span>hr</span>
+                                        <input type="number" id="minutes" name="minutes" min="0" max="59" value="00">
+                                        <span>min</span>
+                                        <input type="number" id="seconds" name="seconds" min="0" max="59" value="00">
+                                        <span>s</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="sport">Sport</label>
+                                    <select id="sport" name="sport">
+                                        <option value="virtual_ride">Virtual Ride</option>
+                                        <option value="ride">Ride</option>
+                                        <option value="run">Run</option>
+                                        <option value="swim">Swim</option>
+                                        <option value="walk">Walk</option>
+                                        <option value="hike">Hike</option>
+                                        <option value="trail_run">Trail Run</option>
+                                        <option value="mountain_bike_ride">Mountain Bike Ride</option>
+                                        <option value="gravel_ride">Gravel Ride</option>
+                                        <option value="e_bike_ride">E-Bike Ride</option>
+                                        <option value="e_mountain_bike_ride">E-Mountain Bike Ride</option>
+                                        <option value="alpine_ski">Alpine Ski</option>
+                                        <option value="badminton">Badminton</option>
+                                        <option value="backcountry_ski">Backcountry Ski</option>
+                                        <option value="canoe">Canoe</option>
+                                        <option value="crossfit">Crossfit</option>
+                                        <option value="elliptical">Elliptical</option>
+                                        <option value="golf">Golf</option>
+                                        <option value="ice_skate">Ice Skate</option>
+                                        <option value="inline_skate">Inline Skate</option>
+                                        <option value="handcycle">Handcycle</option>
+                                        <option value="hiit">HIIT</option>
+                                        <option value="kayaking">Kayaking</option>
+                                        <option value="kitesurf">Kitesurf</option>
+                                        <option value="nordic_ski">Nordic Ski</option>
+                                        <option value="pickleball">Pickleball</option>
+                                        <option value="pilates">Pilates</option>
+                                        <option value="racquetball">Racquetball</option>
+                                        <option value="rock_climb">Rock Climb</option>
+                                        <option value="roller_ski">Roller Ski</option>
+                                        <option value="rowing">Rowing</option>
+                                        <option value="sail">Sail</option>
+                                        <option value="skateboard">Skateboard</option>
+                                        <option value="snowboard">Snowboard</option>
+                                        <option value="snowshoe">Snowshoe</option>
+                                        <option value="soccer">Football (Soccer)</option>
+                                        <option value="squash">Squash</option>
+                                        <option value="stand_up_paddling">Stand Up Paddling</option>
+                                        <option value="stair_stepper">Stair-Stepper</option>
+                                        <option value="surfing">Surfing</option>
+                                        <option value="table_tennis">Table Tennis</option>
+                                        <option value="tennis">Tennis</option>
+                                        <option value="velomobile">Velomobile</option>
+                                        <option value="virtual_run">Virtual Run</option>
+                                        <option value="virtual_rowing">Virtual Rowing</option>
+                                        <option value="weight_training">Weight Training</option>
+                                        <option value="windsurf">Windsurf</option>
+                                        <option value="wheelchair">Wheelchair</option>
+                                        <option value="workout">Workout</option>
+                                        <option value="yoga">Yoga</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="date">Date & Time</label>
+                                    <div class="datetime-inputs">
+                                        <input type="date" id="date" name="date">
+                                        <input type="time" id="time" name="time">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" id="title" name="title" placeholder="Lunch Ride">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea id="description" name="description" rows="4"
+                                    placeholder="How'd it go? Share more about your activity and use @ to tag someone."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="activity-image-upload">Activity Images</label>
+                                <input type="file" id="activity-image-upload" name="activityImages" accept="image/*" multiple>
+                                <div id="activity-images-preview" style="margin-top: 10px; display: none; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Perceived Exertion</h3>
+                                <div class="exertion-container">
+                                    <div class="exertion-info">
+                                        <label>How did that activity feel?</label>
+                                        <div class="exertion-scale">
+                                            <input type="range" id="exertion" name="exertion" min="1" max="10"
+                                                value="3">
+                                            <div class="exertion-labels">
+                                                <span>Easy</span>
+                                                <span>Moderate</span>
+                                                <span>Max Effort</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="exertion-help">
+                                        <h4>What is Perceived Exertion?</h4>
+                                        <p>Perceived Exertion is how hard your workout felt overall. Add it to your
+                                            activities
+                                            to track how your body is responding to your training.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="privacy-section">
+                                <h3>WHO CAN SEE</h3>
+                                <div class="privacy-options">
+                                    <label class="privacy-option">
+                                        <input type="radio" name="privacy" value="everyone" checked>
+                                        <div class="privacy-content">
+                                            <div class="privacy-title">Everyone</div>
+                                            <div class="privacy-description">Anyone on FitFuel can view this activity.
+                                                This activity will be visible on segment and challenge leaderboards, and
+                                                other FitFuel features.</div>
+                                        </div>
+                                    </label>
+
+                                    <label class="privacy-option">
+                                        <input type="radio" name="privacy" value="followers">
+                                        <div class="privacy-content">
+                                            <div class="privacy-title">Followers</div>
+                                            <div class="privacy-description">Only your followers will be able to access
+                                                this activity's details. This activity will not appear on segment or
+                                                challenge leaderboards, but may still count toward some challenge goals.
+                                            </div>
+                                        </div>
+                                    </label>
+
+                                    <label class="privacy-option">
+                                        <input type="radio" name="privacy" value="only-you">
+                                        <div class="privacy-content">
+                                            <div class="privacy-title">Only You</div>
+                                            <div class="privacy-description">This activity is private. Only you can view
+                                                it. If it counts toward a challenge, your followers may see updates on
+                                                your progress. No one will see your activity page, and this activity
+                                                won't show up on leaderboards.</div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="hidden-details-section">
+                                <div class="hidden-details-header">
+                                    <h3>Hidden Details</h3>
+                                    <i class="fas fa-info-circle hidden-details-info"></i>
+                                </div>
+                                <p class="settings-description" style="margin-bottom: 15px; color: #666666; font-size: 0.9rem;">Choose which details appear in your activities by default. You can always override these settings on the Edit Activity screen.</p>
+                                <div class="hidden-details-options">
+                                    <label class="hidden-detail-option">
+                                        <input type="checkbox" name="hiddenDetails" value="startTime">
+                                        <span>Time</span>
+                                    </label>
+                                    <label class="hidden-detail-option">
+                                        <input type="checkbox" name="hiddenDetails" value="pace-speed">
+                                        <span>Pace / Speed</span>
+                                    </label>
+                                    <label class="hidden-detail-option">
+                                        <input type="checkbox" name="hiddenDetails" value="calories">
+                                        <span>Calories</span>
+                                    </label>
+                                    <label class="hidden-detail-option">
+                                        <input type="checkbox" name="hiddenDetails" value="power">
+                                        <span>Power</span>
+                                    </label>
+                                    <label class="hidden-detail-option">
+                                        <input type="checkbox" name="hiddenDetails" value="heart-rate">
+                                        <span>Heart Rate</span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="private-notes-section">
+                                <h3>Private Notes</h3>
+                                <textarea name="privateNotes" class="private-notes-textarea"
+                                    placeholder="Jot down private notes here. Only you can see these."></textarea>
+                            </div>
+
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Save Activity</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                    <div id="manual-recipe-section" class="activity-section">
+                        <form id="manual-recipe-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="recipe-name">Recipe Name *</label>
+                                    <input type="text" id="recipe-name" name="recipeName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category *</label>
+                                    <div class="category-checkboxes" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 8px;">
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="breakfast" style="cursor: pointer;">
+                                            <span>Breakfast</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="lunch" style="cursor: pointer;">
+                                            <span>Lunch</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="dinner" style="cursor: pointer;">
+                                            <span>Dinner</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="snack" style="cursor: pointer;">
+                                            <span>Snack</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="dessert" style="cursor: pointer;">
+                                            <span>Dessert</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="sweet" style="cursor: pointer;">
+                                            <span>Sweet</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="savory" style="cursor: pointer;">
+                                            <span>Savory</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                            <input type="checkbox" name="category" value="tangy" style="cursor: pointer;">
+                                            <span>Tangy</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="manual-recipe-description">Description *</label>
+                                <textarea id="manual-recipe-description" name="description" rows="3" required
+                                    placeholder="Describe your recipe..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="recipe-image-upload">Recipe Image</label>
+                                <input type="file" id="recipe-image-upload" name="recipeImage" accept="image/*">
+                                <div id="recipe-image-preview" style="margin-top: 10px; display: none;">
+                                    <img id="recipe-image-preview-img" src="" alt="Recipe preview" style="max-width: 300px; max-height: 200px; border-radius: 8px; border: 1px solid #e0e0e0;">
+                                    <button type="button" id="remove-recipe-image" style="margin-left: 10px; padding: 5px 10px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="form-row three-col">
+                                <div class="form-group">
+                                    <label for="manual-prep-time">Prep Time (minutes) *</label>
+                                    <input type="number" id="manual-prep-time" name="prepTime" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-cook-time">Cook Time (minutes) *</label>
+                                    <input type="number" id="manual-cook-time" name="cookTime" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-servings">Servings *</label>
+                                    <input type="number" id="manual-servings" name="servings" min="1" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ingredients">Ingredients *</label>
+                                <div id="ingredients-container">
+                                    <div class="ingredient-input-group">
+                                        <input type="text" class="ingredient-input" placeholder="e.g., 2 cups flour"
+                                            required>
+                                        <button type="button" class="remove-ingredient"
+                                            style="display: none;">&times;</button>
+                                    </div>
+                                </div>
+                                <button type="button" id="add-ingredient" class="btn-secondary">+ Add Ingredient</button>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="directions">Directions *</label>
+                                <div id="directions-container">
+                                    <div class="direction-input-group">
+                                        <textarea class="direction-input" placeholder="Enter step 1..." required></textarea>
+                                        <button type="button" class="remove-direction"
+                                            style="display: none;">&times;</button>
+                                    </div>
+                                </div>
+                                <button type="button" id="add-direction" class="btn-secondary">+ Add Step</button>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="calories">Calories per serving</label>
+                                    <input type="number" id="calories" name="calories" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="difficulty">Difficulty</label>
+                                    <select id="difficulty" name="difficulty">
+                                        <option value="easy">Easy</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="hard">Hard</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="recipe-notes">Notes</label>
+                                <textarea id="recipe-notes" name="notes" rows="2"
+                                    placeholder="Any additional notes or tips..."></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Add Recipe</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+        </section>
+
+
+        <section id="goals" class="goals">
+            <div class="goals-layout">
+                <div class="activity-sidebar">
+                    <nav class="activity-nav">
+                        <button class="activity-nav-btn active" data-tab="survey">
+                            <i class="fas fa-clipboard-list"></i>
+                            Survey
+                        </button>
+                        <button class="activity-nav-btn" data-tab="manual">
+                            <i class="fas fa-sliders-h"></i>
+                            Manual
+                        </button>
+                        <button class="activity-nav-btn" data-tab="reflection">
+                            <i class="fas fa-chart-line"></i>
+                            Reflection
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="goals-content">
+                    <div id="survey-tab" class="goals-tab active">
+                        <form id="survey-form" class="goals-form">
+                            <div id="survey-step-1" class="survey-step active">
+                                <div class="form-group">
+                                    <label class="form-label">Age</label>
+                                    <input type="number" id="survey-age" name="age" min="1" max="120" class="form-input" placeholder="Enter your age" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Biological Gender</label>
+                                    <select id="survey-gender" name="gender" class="form-select" required>
+                                        <option value="">Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Prefer not to say</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Height</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="survey-height-value" name="height-value" min="0" step="0.1" class="form-input" placeholder="Enter height" required>
+                                        <select id="survey-height-unit" name="height-unit" class="form-select" style="width: auto; min-width: 80px;">
+                                            <option value="cm">cm</option>
+                                            <option value="ft-in">ft/in</option>
+                                        </select>
+                                    </div>
+                                    <div id="survey-height-feet-inches" style="display: none; margin-top: 15px;">
+                                        <div class="form-row" style="grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div class="input-with-unit">
+                                                <input type="number" id="survey-height-feet" name="height-feet" min="0" max="8" step="1" class="form-input" placeholder="Feet">
+                                                <span class="input-unit">ft</span>
+                                            </div>
+                                            <div class="input-with-unit">
+                                                <input type="number" id="survey-height-inches" name="height-inches" min="0" max="11" step="0.1" class="form-input" placeholder="Inches">
+                                                <span class="input-unit">in</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Weight</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="survey-weight-value" name="weight-value" min="0" step="0.1" class="form-input" placeholder="Enter weight" required>
+                                        <select id="survey-weight-unit" name="weight-unit" class="form-select" style="width: auto; min-width: 80px;">
+                                            <option value="kg">kg</option>
+                                            <option value="lbs">lbs</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-primary survey-next-btn" onclick="goToSurveyStep(2)">Next</button>
+                            </div>
+
+                            <div id="survey-step-2" class="survey-step">
+                                <div class="form-group">
+                                    <label class="form-label">Select Your Activity Level</label>
+                                    <div class="radio-group activity-level-group">
+                                        <label class="radio-option activity-level-option">
+                                            <input type="radio" name="activity-level" value="sedentary" required>
+                                            <span class="radio-label">SEDENTARY</span>
+                                        </label>
+                                        <label class="radio-option activity-level-option">
+                                            <input type="radio" name="activity-level" value="moderate-active" required>
+                                            <span class="radio-label">MODERATE ACTIVE (2-3/WEEK)</span>
+                                        </label>
+                                        <label class="radio-option activity-level-option">
+                                            <input type="radio" name="activity-level" value="high-active" required>
+                                            <span class="radio-label">HIGH ACTIVE (4-7/WEEK)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="survey-nav-buttons">
+                                    <button type="button" class="btn-secondary" onclick="goToSurveyStep(1)">Back</button>
+                                    <button type="button" class="btn-primary survey-next-btn" onclick="goToSurveyStep(3)">Next</button>
+                                </div>
+                            </div>
+
+                            <div id="survey-step-3" class="survey-step">
+                                <div class="form-group">
+                                    <label class="form-label">Choose a goal based on your activity level</label>
+                                    <div id="goal-options-container" class="goal-type-cards"></div>
+                                </div>
+                                <div class="survey-nav-buttons">
+                                    <button type="button" class="btn-secondary" onclick="goToSurveyStep(2)">Back</button>
+                                    <button type="button" class="btn-primary survey-next-btn" onclick="goToSurveyStep(4)">Next</button>
+                                </div>
+                            </div>
+
+                            <div id="survey-step-4" class="survey-step">
+                                <div class="form-group">
+                                    <label class="form-label">Diet Type</label>
+                                    <div class="checkbox-group diet-type-group">
+                                        <label class="checkbox-option diet-type-option">
+                                            <input type="checkbox" name="diet-type" value="vegetarian" id="diet-vegetarian">
+                                            <span>VEGETARIAN</span>
+                                        </label>
+                                        <label class="checkbox-option diet-type-option">
+                                            <input type="checkbox" name="diet-type" value="vegan" id="diet-vegan">
+                                            <span>VEGAN</span>
+                                        </label>
+                                        <label class="checkbox-option diet-type-option">
+                                            <input type="checkbox" name="diet-type" value="keto" id="diet-keto">
+                                            <span>KETO</span>
+                                        </label>
+                                        <label class="checkbox-option diet-type-option">
+                                            <input type="checkbox" name="diet-type" value="mediterranean" id="diet-mediterranean">
+                                            <span>MEDITERRANEAN</span>
+                                        </label>
+                                        <label class="checkbox-option diet-type-option">
+                                            <input type="checkbox" name="diet-type" value="high-protein" id="diet-high-protein">
+                                            <span>HIGH PROTEIN</span>
+                                        </label>
+                                        <label class="checkbox-option diet-type-option">
+                                            <input type="checkbox" name="diet-type" value="low-carb" id="diet-low-carb">
+                                            <span>LOW CARB</span>
+                                        </label>
+                                        <label class="checkbox-option diet-type-option">
+                                            <input type="checkbox" name="diet-type" value="paleo" id="diet-paleo">
+                                            <span>PALEO</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Allergies</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="allergies" value="nuts">
+                                            <span>Nuts</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="allergies" value="dairy">
+                                            <span>Dairy</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="allergies" value="gluten">
+                                            <span>Gluten</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="allergies" value="shellfish">
+                                            <span>Shellfish</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="allergies" value="eggs">
+                                            <span>Eggs</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="allergies" value="soy">
+                                            <span>Soy</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="survey-nav-buttons">
+                                    <button type="button" class="btn-secondary" onclick="goToSurveyStep(3)">Back</button>
+                                    <button type="submit" class="btn-primary">Complete Survey</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="manual-tab" class="goals-tab">
+                        <form id="manual-goals-form" class="goals-form">
+                            <div class="form-group">
+                                <label class="form-label">Daily Calorie Target</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="manual-calorie-target" name="calorie-target" min="1000" max="5000" step="50" class="form-input" placeholder="Enter calorie target" required>
+                                    <span class="input-unit">kcal</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Diet Type</label>
+                                <div class="checkbox-group diet-type-group">
+                                    <label class="checkbox-option diet-type-option">
+                                        <input type="checkbox" name="diet-type" value="vegetarian" id="manual-diet-vegetarian">
+                                        <span>VEGETARIAN</span>
+                                    </label>
+                                    <label class="checkbox-option diet-type-option">
+                                        <input type="checkbox" name="diet-type" value="vegan" id="manual-diet-vegan">
+                                        <span>VEGAN</span>
+                                    </label>
+                                    <label class="checkbox-option diet-type-option">
+                                        <input type="checkbox" name="diet-type" value="keto" id="manual-diet-keto">
+                                        <span>KETO</span>
+                                    </label>
+                                    <label class="checkbox-option diet-type-option">
+                                        <input type="checkbox" name="diet-type" value="mediterranean" id="manual-diet-mediterranean">
+                                        <span>MEDITERRANEAN</span>
+                                    </label>
+                                    <label class="checkbox-option diet-type-option">
+                                        <input type="checkbox" name="diet-type" value="high-protein" id="manual-diet-high-protein">
+                                        <span>HIGH PROTEIN</span>
+                                    </label>
+                                    <label class="checkbox-option diet-type-option">
+                                        <input type="checkbox" name="diet-type" value="low-carb" id="manual-diet-low-carb">
+                                        <span>LOW CARB</span>
+                                    </label>
+                                    <label class="checkbox-option diet-type-option">
+                                        <input type="checkbox" name="diet-type" value="paleo" id="manual-diet-paleo">
+                                        <span>PALEO</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Allergies</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="allergies" value="nuts">
+                                        <span>Nuts</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="allergies" value="dairy">
+                                        <span>Dairy</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="allergies" value="gluten">
+                                        <span>Gluten</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="allergies" value="shellfish">
+                                        <span>Shellfish</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="allergies" value="eggs">
+                                        <span>Eggs</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="allergies" value="soy">
+                                        <span>Soy</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Goal</button>
+                        </form>
+                    </div>
+
+                    <div id="reflection-tab" class="goals-tab">
+                        <div class="reflection-content">
+                            <div class="reflection-section">
+                                <h2>Summary</h2>
+                                <div id="goal-summary-card" class="goal-summary-card">
+                                    <div class="summary-content">
+                                        <p id="summary-text">You're on track to maintain weight — daily avg 2,250 kcal.</p>
+                                        <div class="progress-ring-container">
+                                            <div class="progress-ring">
+                                                <svg class="progress-ring-svg" width="80" height="80">
+                                                    <circle class="progress-ring-circle-bg" cx="40" cy="40" r="35"></circle>
+                                                    <circle class="progress-ring-circle" cx="40" cy="40" r="35" id="progress-circle"></circle>
+                                                </svg>
+                                                <div class="progress-ring-text">
+                                                    <span id="progress-percentage">0%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reflection-section">
+                                <h2>Weekly Reflection</h2>
+                                <div class="reflection-form">
+                                    <textarea id="weekly-reflection" class="form-textarea" rows="6" placeholder="Reflect on your progress this week..."></textarea>
+                                    <button type="button" class="btn-primary" onclick="saveWeeklyReflection()">Save Reflection</button>
+                                </div>
+                            </div>
+                            <div class="reflection-section">
+                                <h2>Data & Sharing</h2>
+                                <div class="data-sharing-options">
+                                    <label class="setting-label">
+                                        <input type="checkbox" id="share-progress">
+                                        <span>Share progress with friends</span>
+                                    </label>
+                                    <label class="setting-label">
+                                        <input type="checkbox" id="export-data">
+                                        <span>Export data</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="recipes" class="recipes">
+            <div class="recipes-container">
+                <div class="recipes-header">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="recipe-search" placeholder='Search for...'>
+                    </div>
+                    <div class="recipes-nav">
+                        <button class="nav-btn" id="surprise-me-btn">SURPRISE ME</button>
+                        <div class="nav-dropdown recipes-mega-menu-container">
+                            <button class="nav-btn dropdown-toggle">Recipes <i class="fas fa-chevron-up"></i></button>
+                            <div class="recipes-mega-menu">
+                                <div class="mega-menu-sidebar">
+                                    <div class="mega-menu-item active" data-section="to-cook-now">
+                                        <span>To cook now</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="mega-menu-item" data-section="by-diet">
+                                        <span>By diet</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="mega-menu-item" data-section="by-method">
+                                        <span>By method</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-section active" id="to-cook-now-section">
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">BEST</div>
+                                            <a href="#" class="mega-menu-link">Weeknight favorites</a>
+                                            <a href="#" class="mega-menu-link">Most popular</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">EASY</div>
+                                            <a href="#" class="mega-menu-link">30 minutes or less</a>
+                                            <a href="#" class="mega-menu-link">5 ingredients or fewer</a>
+                                            <a href="#" class="mega-menu-link">Make ahead</a>
+                                            <a href="#" class="mega-menu-link">One-pot meals</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">MEALS</div>
+                                            <a href="#" class="mega-menu-link">Breakfast</a>
+                                            <a href="#" class="mega-menu-link">Lunch</a>
+                                            <a href="#" class="mega-menu-link">Dinner</a>
+                                            <a href="#" class="mega-menu-link">Dessert</a>
+                                            <a href="#" class="mega-menu-link">Drinks</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega-menu-section" id="by-diet-section">
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">SUITABLE FOR</div>
+                                            <a href="#" class="mega-menu-link" data-filter="vegetarian">Vegetarian</a>
+                                            <a href="#" class="mega-menu-link" data-filter="vegan">Vegan</a>
+                                            <a href="#" class="mega-menu-link" data-filter="keto">Keto</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">FREE FROM</div>
+                                            <a href="#" class="mega-menu-link" data-filter="gluten-free">Gluten</a>
+                                            <a href="#" class="mega-menu-link" data-filter="dairy-free">Dairy</a>
+                                            <a href="#" class="mega-menu-link" data-filter="nut-free">Nuts</a>
+                                            <a href="#" class="mega-menu-link" data-filter="soy-free">Soy</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega-menu-section" id="by-method-section">
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">BAKE</div>
+                                            <a href="#" class="mega-menu-link" data-filter="bake-cookies">Cookies</a>
+                                            <a href="#" class="mega-menu-link" data-filter="bake-cakes">Cakes</a>
+                                            <a href="#" class="mega-menu-link" data-filter="bake-breads">Breads</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">GRILL</div>
+                                            <a href="#" class="mega-menu-link" data-filter="grill-chicken">Chicken</a>
+                                            <a href="#" class="mega-menu-link" data-filter="grill-vegetables">Vegetables</a>
+                                            <a href="#" class="mega-menu-link" data-filter="grill-seafood">Seafood</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">ROAST</div>
+                                            <a href="#" class="mega-menu-link" data-filter="roast-chicken">Chicken</a>
+                                            <a href="#" class="mega-menu-link" data-filter="roast-vegetables">Vegetables</a>
+                                            <a href="#" class="mega-menu-link" data-filter="roast-all">All roasting</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">APPLIANCE BASED</div>
+                                            <a href="#" class="mega-menu-link" data-filter="air-fryer">Air fryer</a>
+                                            <a href="#" class="mega-menu-link" data-filter="instant-pot">Instant pot</a>
+                                            <a href="#" class="mega-menu-link" data-filter="slow-cooker">Slow cooker</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-dropdown ingredients-mega-menu-container">
+                            <button class="nav-btn dropdown-toggle">Ingredients <i class="fas fa-chevron-up"></i></button>
+                            <div class="ingredients-mega-menu">
+                                <div class="mega-menu-sidebar">
+                                    <div class="mega-menu-item active" data-section="proteins">
+                                        <span>Proteins</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="mega-menu-item" data-section="produce">
+                                        <span>Produce</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="mega-menu-item" data-section="pantry">
+                                        <span>Pantry</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="mega-menu-item" data-section="drinks">
+                                        <span>Drinks</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-section active" id="proteins-section">
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">MEAT</div>
+                                            <a href="#" class="mega-menu-link" data-filter="chicken">Chicken</a>
+                                            <a href="#" class="mega-menu-link" data-filter="pork">Pork</a>
+                                            <a href="#" class="mega-menu-link" data-filter="turkey">Turkey</a>
+                                            <a href="#" class="mega-menu-link" data-filter="beef">Beef</a>
+                                            <a href="#" class="mega-menu-link" data-filter="lamb">Lamb</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">SEAFOOD</div>
+                                            <a href="#" class="mega-menu-link" data-filter="salmon">Salmon</a>
+                                            <a href="#" class="mega-menu-link" data-filter="shrimp">Shrimp</a>
+                                            <a href="#" class="mega-menu-link" data-filter="cod">Cod</a>
+                                            <a href="#" class="mega-menu-link" data-filter="canned-tuna">Canned tuna</a>
+                                            <a href="#" class="mega-menu-link" data-filter="scallop">Scallop</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">VEGETARIAN</div>
+                                            <a href="#" class="mega-menu-link" data-filter="tofu">Tofu</a>
+                                            <a href="#" class="mega-menu-link" data-filter="eggs">Eggs</a>
+                                            <a href="#" class="mega-menu-link" data-filter="lentils">Lentils</a>
+                                            <a href="#" class="mega-menu-link" data-filter="chickpeas">Chickpeas</a>
+                                            <a href="#" class="mega-menu-link" data-filter="black-beans">Black beans</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">VIDEO GUIDES</div>
+                                            <a href="#" class="mega-menu-link">Sear any meat</a>
+                                            <a href="#" class="mega-menu-link">Carve a chicken</a>
+                                            <a href="#" class="mega-menu-link">Fillet a whole fish</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega-menu-section" id="produce-section">
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">VEGETABLES</div>
+                                            <a href="#" class="mega-menu-link" data-filter="beets">Beets</a>
+                                            <a href="#" class="mega-menu-link" data-filter="broccoli">Broccoli</a>
+                                            <a href="#" class="mega-menu-link" data-filter="cauliflower">Cauliflower</a>
+                                            <a href="#" class="mega-menu-link" data-filter="spinach">Spinach</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">FRUIT</div>
+                                            <a href="#" class="mega-menu-link" data-filter="apples">Apples</a>
+                                            <a href="#" class="mega-menu-link" data-filter="cranberries">Cranberries</a>
+                                            <a href="#" class="mega-menu-link" data-filter="figs">Figs</a>
+                                            <a href="#" class="mega-menu-link" data-filter="pears">Pears</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">PRODUCE TIPS</div>
+                                            <a href="#" class="mega-menu-link">How to keep apples from turning brown</a>
+                                            <a href="#" class="mega-menu-link">How to roast broccoli</a>
+                                            <a href="#" class="mega-menu-link">How to cook butternut squash</a>
+                                            <a href="#" class="mega-menu-link">More storage advice</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega-menu-section" id="pantry-section">
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">GRAINS</div>
+                                            <a href="#" class="mega-menu-link" data-filter="pasta-noodles">Pasta and noodles</a>
+                                            <a href="#" class="mega-menu-link" data-filter="rice">Rice</a>
+                                            <a href="#" class="mega-menu-link" data-filter="quinoa">Quinoa</a>
+                                            <a href="#" class="mega-menu-link" data-filter="polenta">Polenta</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">LEGUMES</div>
+                                            <a href="#" class="mega-menu-link" data-filter="white-beans">White beans</a>
+                                            <a href="#" class="mega-menu-link" data-filter="black-beans">Black beans</a>
+                                            <a href="#" class="mega-menu-link" data-filter="chickpea">Chickpea</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega-menu-section" id="drinks-section">
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">SPIRITS</div>
+                                            <a href="#" class="mega-menu-link" data-filter="gin">Gin</a>
+                                            <a href="#" class="mega-menu-link" data-filter="tequila">Tequila</a>
+                                            <a href="#" class="mega-menu-link" data-filter="vodka">Vodka</a>
+                                            <a href="#" class="mega-menu-link" data-filter="whiskey">Whiskey</a>
+                                            <a href="#" class="mega-menu-link">All cocktails</a>
+                                        </div>
+                                        <div class="mega-menu-column">
+                                            <div class="mega-menu-column-title">NON-ALCOHOLIC</div>
+                                            <a href="#" class="mega-menu-link" data-filter="mocktails">Mocktails</a>
+                                            <a href="#" class="mega-menu-link" data-filter="coffee">Coffee</a>
+                                            <a href="#" class="mega-menu-link" data-filter="tea">Tea</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-dropdown">
+                            <button class="nav-btn dropdown-toggle">Category <i class="fas fa-chevron-down"></i></button>
+                            <div class="nav-dropdown-menu">
+                                <a href="#" class="nav-dropdown-item" data-category="breakfast">Breakfast</a>
+                                <a href="#" class="nav-dropdown-item" data-category="lunch">Lunch</a>
+                                <a href="#" class="nav-dropdown-item" data-category="dinner">Dinner</a>
+                                <a href="#" class="nav-dropdown-item" data-category="dessert">Dessert</a>
+                                <a href="#" class="nav-dropdown-item" data-category="snack">Snack</a>
+                                <a href="#" class="nav-dropdown-item" data-category="appetizer">Appetizer</a>
+                                <a href="#" class="nav-dropdown-item" data-category="sweet">Sweet</a>
+                                <a href="#" class="nav-dropdown-item" data-category="savory">Savory</a>
+                                <a href="#" class="nav-dropdown-item" data-category="tangy">Tangy</a>
+                            </div>
+                        </div>
+                        <div class="nav-dropdown occasions-mega-menu-container">
+                            <button class="nav-btn dropdown-toggle">OCCASIONS <i class="fas fa-chevron-up"></i></button>
+                            <div class="occasions-mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-title">SEASONAL</div>
+                                        <a href="#" class="mega-menu-link" data-occasion="diwali">Diwali</a>
+                                        <a href="#" class="mega-menu-link" data-occasion="fall-favorites">Fall Favorites</a>
+                                        <a href="#" class="mega-menu-link" data-occasion="halloween">Halloween</a>
+                                        <a href="#" class="mega-menu-link" data-occasion="thanksgiving">Thanksgiving</a>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-title">GATHERINGS</div>
+                                        <a href="#" class="mega-menu-link" data-occasion="dinner-parties">Dinner Parties</a>
+                                        <a href="#" class="mega-menu-link" data-occasion="cocktail-hour">Cocktail Hour</a>
+                                        <a href="#" class="mega-menu-link" data-occasion="birthdays">Birthdays</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-dropdown cuisines-mega-menu-container">
+                            <button class="nav-btn dropdown-toggle">CUISINES <i class="fas fa-chevron-up"></i></button>
+                            <div class="cuisines-mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-title">EUROPE</div>
+                                        <a href="#" class="mega-menu-link" data-cuisine="italian">Italian</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="french">French</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="mediterranean">Mediterranean</a>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-title">ASIA</div>
+                                        <a href="#" class="mega-menu-link" data-cuisine="vietnamese">Vietnamese</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="chinese">Chinese</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="taiwanese">Taiwanese</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="thai">Thai</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="korean">Korean</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="japanese">Japanese</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="indian">Indian</a>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-title">NORTH AMERICA</div>
+                                        <a href="#" class="mega-menu-link" data-cuisine="american">American</a>
+                                        <a href="#" class="mega-menu-link" data-cuisine="mexican">Mexican</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calories-filter">
+                            <label>Calories</label>
+                            <div class="calories-inputs">
+                                <input type="number" id="calories-min" placeholder="Min" min="0">
+                                <span class="calories-separator">-</span>
+                                <input type="number" id="calories-max" placeholder="Max" min="0">
+                            </div>
+                        </div>
+                        <button class="reset-btn" id="reset-filters">RESET</button>
+                            </div>
+                        </div>
+                <div class="active-filters" id="active-filters"></div>
+
+
+                <div class="recipe-grid" id="recipe-grid">
+
+                </div>
+
+
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <h3>No recipes match these filters</h3>
+                    <p>Try widening calories or removing an ingredient.</p>
+                </div>
+
+
+                <div class="load-more-container">
+                    <button class="btn btn-primary" id="load-more">Load More</button>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="recipe-view" class="recipe-view">
+            <div class="recipe-view-container">
+
+                <div class="action-sidebar">
+                    <div class="action-icon btn-like-recipe" id="recipe-view-like-btn" title="Like">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <div class="action-icon btn-save-recipe" id="recipe-view-save-btn" title="Save">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <div class="action-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                </div>
+
+
+                <div class="recipe-header">
+                    <h1 class="recipe-title" id="recipe-title">(FOOD TITLE)</h1>
+                    <p class="recipe-description" id="recipe-description">(FOOD DESCRIPTION)</p>
+                    <p class="recipe-submission">SUBMITTED BY <span id="recipe-author">(AUTHOR)</span>, LAST UPDATED
+                        <span id="recipe-date">(MONTH DAY, YEAR)</span>
+                    </p>
+                    <div class="recipe-image">
+                    </div>
+                </div>
+
+
+                <div class="recipe-metadata">
+                    <div class="metadata-content">
+                        <div class="time-info">
+                            <div class="time-item">
+                                <span class="time-label">PREP TIME:</span>
+                                <span class="time-value" id="prep-time">(VALUE)</span>
+                            </div>
+                            <div class="time-item">
+                                <span class="time-label">COOK TIME:</span>
+                                <span class="time-value" id="cook-time">(VALUE)</span>
+                            </div>
+                            <div class="time-item">
+                                <span class="time-label">TOTAL TIME:</span>
+                                <span class="time-value" id="total-time">(VALUE)</span>
+                            </div>
+                        </div>
+                        <div class="serving-info">
+                            <div class="serving-item">
+                                <span class="serving-label">SERVES:</span>
+                                <span class="serving-value" id="servings">(NUMBER)</span>
+                            </div>
+                            <div class="cook-mode-item">
+                                <span class="cook-mode-label">COOK MODE</span>
+                                <div class="toggle-switch">
+                                    <i class="fas fa-toggle-off"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cook-mode-info">
+                            <div class="recipe-yield-adjuster">
+                                <div class="yield-buttons">
+                                    <button class="yield-btn" data-multiplier="0.5">1/2X</button>
+                                    <button class="yield-btn active" data-multiplier="1">1X</button>
+                                    <button class="yield-btn" data-multiplier="2">2X</button>
+                                </div>
+                                <p class="yield-info">
+                                    <i class="fas fa-question-circle"></i>
+                                    Original recipe (1X) yields
+                                </p>
+                            </div>
+                            <div class="cook-mode-item">
+                                <span class="cook-mode-label">UNIT:</span>
+                                <div class="unit-buttons">
+                                    <button class="unit-btn active" data-unit="us">US</button>
+                                    <button class="unit-btn" data-unit="metric">METRIC</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ingredients-directions">
+                    <div class="ingredients-directions-content">
+                        <div class="ingredients-section">
+                            <h2>INGREDIENTS</h2>
+                            <ul id="ingredients-list">
+
+                            </ul>
+                        </div>
+                        <div class="directions-section">
+                            <h2>DIRECTIONS</h2>
+                            <ol id="directions-list">
+
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="notes-section">
+                    <div class="notes-content">
+                        <div class="notes-box">
+                            <h3>NOTES:</h3>
+                            <div class="notes-text" id="notes-text">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="nutrition-section">
+                    <h3>NUTRITION FACTS (PER SERVING)</h3>
+                    <div class="nutrition-content" id="nutrition-content">
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </section>
+
+
+        <section id="settings" class="settings" style="display: none;">
+            <div class="settings-container">
+                <div class="settings-layout">
+
+                    <div class="settings-sidebar">
+                        <nav class="settings-nav">
+                            <button class="settings-nav-item guest-only-hidden active" data-tab="profile">
+                                <i class="fas fa-user-circle"></i>
+                                <span>My Profile</span>
+                            </button>
+                            <button class="settings-nav-item" data-tab="display">
+                                <i class="fas fa-palette"></i>
+                                <span>Display Preference</span>
+                            </button>
+                            <button class="settings-nav-item guest-only-hidden" data-tab="privacy">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Privacy Controls</span>
+                            </button>
+                        </nav>
+                    </div>
+
+
+                    <div class="settings-content-wrapper">
+
+                        <div class="settings-tab-content active" id="profile-tab">
+                            <div class="profile-layout">
+
+                                <div class="profile-main-content">
+                                    <div class="profile-photo-account-section">
+
+                                        <div class="profile-photo-section">
+                                            <label class="photo-label">Current Photo</label>
+                                            <div class="photo-container">
+                                                <div class="profile-photo-placeholder" id="profile-photo">
+                                                    <span class="photo-initials" id="photo-initials">XX</span>
+                                                </div>
+                                                <button type="button" class="photo-edit-btn" id="edit-photo-btn">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                                <input type="file" id="photo-input" accept="image/*"
+                                                    style="display: none;">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="my-account-section">
+                                            <h3 class="account-title">My Account</h3>
+                                            <div class="account-content">
+                                                <div class="account-item">
+                                                    <label class="account-label">EMAIL</label>
+                                                    <p class="account-value" id="sidebar-email">paaanda919@gmail.com</p>
+                                                </div>
+                                                <div class="account-item">
+                                                    <label class="account-label">MEMBERSHIP STATUS</label>
+                                                    <p class="account-value">Free Account</p>
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-full"
+                                                    id="start-trial-btn">Start Your Free Trial</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="profile-fields">
+                                        <div class="profile-field">
+                                            <label class="profile-field-label">Name</label>
+                                            <input type="text" id="profile-name" class="profile-field-input"
+                                                placeholder="Enter your name">
+                                        </div>
+                                        <div class="profile-field">
+                                            <label class="profile-field-label">Birthday</label>
+                                            <input type="date" id="profile-birthday" class="profile-field-input">
+                                        </div>
+                                        <div class="profile-field">
+                                            <label class="profile-field-label">Gender</label>
+                                            <select id="profile-gender" class="profile-field-select">
+                                                <option value="">Select gender</option>
+                                                <option value="woman">Woman</option>
+                                                <option value="man">Man</option>
+                                                <option value="non-binary">Non-binary</option>
+                                                <option value="prefer-not-to-say">Prefer not to say</option>
+                                            </select>
+                                        </div>
+                                        <div class="profile-field">
+                                            <label class="profile-field-label">Location</label>
+                                            <input type="text" id="profile-location" class="profile-field-input"
+                                                placeholder="Enter your location">
+                                        </div>
+                                        <div class="profile-field">
+                                            <label class="profile-field-label">Profile Bio</label>
+                                            <textarea id="profile-bio" class="profile-field-textarea" rows="4"
+                                                placeholder="Tell us about yourself..."></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="profile-actions">
+                                        <button type="button" class="btn btn-primary" id="save-profile-btn">Save
+                                            Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="settings-tab-content" id="display-tab">
+                            <div class="display-preferences-list">
+                                <div class="preference-item">
+                                    <div class="preference-item-row">
+                                        <div class="preference-label">Units & Measurements</div>
+                                        <div class="preference-value">
+                                            <select id="units-measurements" class="preference-select">
+                                                <option value="metric">Metrics</option>
+                                                <option value="imperial">US Standard</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="preference-item guest-only-hidden">
+                                    <div class="preference-item-row">
+                                        <div class="preference-label">Dash Order</div>
+                                        <div class="preference-value">
+                                            <select id="feed-ordering" class="preference-select">
+                                                <option value="personalized">Personalized</option>
+                                                <option value="recent">Most Recent</option>
+                                                <option value="popular">Most Popular</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <p class="preference-description">Change how activities are ordered in your dashboard.
+                                        Any changes will apply only to new activities in your feed, so you may not
+                                        notice a difference at first. <a href="#" class="learn-more-link"
+                                            id="learn-more-feed">Learn More</a></p>
+                                </div>
+                                <div class="preference-item guest-only-hidden">
+                                    <div class="preference-item-row">
+                                        <div class="preference-label">Recipe Recommendation Period</div>
+                                        <div class="preference-value">
+                                            <select id="recommendation-period-default" class="preference-select">
+                                                <option value="1">1 Day</option>
+                                                <option value="7" selected>1 Week</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <p class="preference-description">Set your default period for recipe recommendations. You can still change this in the profile page.</p>
+                                </div>
+                                <div class="preference-item">
+                                    <div class="preference-label" style="margin-bottom: 16px;">Theme Colors</div>
+                                    <div class="theme-colors-container">
+                                        <div class="theme-color-item">
+                                            <label for="primary-color" class="theme-color-label">Primary Color</label>
+                                            <div class="color-picker-wrapper">
+                                                <input type="color" id="primary-color" class="color-picker" value="#000000">
+                                                <input type="text" id="primary-color-hex" class="color-hex-input" value="#000000" maxlength="7">
+                                            </div>
+                                        </div>
+                                        <div class="theme-color-item">
+                                            <label for="secondary-color" class="theme-color-label">Secondary Color</label>
+                                            <div class="color-picker-wrapper">
+                                                <input type="color" id="secondary-color" class="color-picker" value="#ffffff">
+                                                <input type="text" id="secondary-color-hex" class="color-hex-input" value="#ffffff" maxlength="7">
+                                            </div>
+                                        </div>
+                                        <div class="theme-color-item">
+                                            <label for="accent-color" class="theme-color-label">Accent Color</label>
+                                            <div class="color-picker-wrapper">
+                                                <input type="color" id="accent-color" class="color-picker" value="#666666">
+                                                <input type="text" id="accent-color-hex" class="color-hex-input" value="#666666" maxlength="7">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="preference-description">Customize the color scheme of your FitFuel experience. Changes will be applied immediately.</p>
+                                </div>
+                            </div>
+                            <div class="settings-actions">
+                                <button type="button" class="btn btn-primary" id="save-display-btn">Save
+                                    Changes</button>
+                            </div>
+                        </div>
+
+
+                        <div class="settings-tab-content" id="privacy-tab">
+                            <div class="settings-section">
+                                <h3 class="settings-section-title">Where You Appear</h3>
+                                <div class="privacy-control-group">
+                                    <div class="privacy-item">
+                                        <div class="privacy-info">
+                                            <label class="privacy-label">Profile Page</label>
+                                            <p class="privacy-description">Your profile page displays information about
+                                                you, such as your name, activities, followers, photos and stats. Parts
+                                                of your profile page will always be publicly available. <a href="#"
+                                                    class="learn-more-link">Learn More.</a></p>
+                                        </div>
+                                        <div class="who-can-see-box">
+                                            <label class="radio-option">
+                                                <input type="radio" name="profile-visibility" value="everyone" checked>
+                                                Everyone
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="profile-visibility" value="followers">
+                                                Followers
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="profile-visibility" value="only-you">
+                                                Only You
+                                            </label>
+                                            <p class="who-can-see-description">Anyone on FitFuel can search for and view
+                                                your complete profile page and activity summaries, as well as follow
+                                                you. Anyone on the web can search for and view certain profile
+                                                information.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="privacy-item">
+                                        <div class="privacy-info">
+                                            <label class="privacy-label">Activities</label>
+                                            <p class="privacy-description">Activities are workouts, races or events you
+                                                record or upload to FitFuel. What you choose below will be your default,
+                                                but you can change settings for each individual activity.
+                                                <a href="#" class="learn-more-link">Learn More.</a></p>
+                                        </div>
+                                        <div class="who-can-see-box">
+                                            <label class="radio-option">
+                                                <input type="radio" name="activity-visibility" value="everyone" checked>
+                                                Everyone
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="activity-visibility" value="followers">
+                                                Followers
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="activity-visibility" value="only-you">
+                                                Only You
+                                            </label>
+                                            <p class="who-can-see-description">Anyone on FitFuel can view your
+                                                activities. Your activities will be visible on segment and challenge
+                                                leaderboards, and other FitFuel features.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="privacy-item">
+                                        <div class="privacy-info">
+                                            <label class="privacy-label">Recipes</label>
+                                            <p class="privacy-description">Control who can see your recipes. Your recipes
+                                                will be displayed according to the options below. <a href="#"
+                                                    class="learn-more-link">Learn More.</a></p>
+                                        </div>
+                                        <div class="who-can-see-box">
+                                            <label class="radio-option">
+                                                <input type="radio" name="group-activity-visibility" value="everyone"
+                                                    checked>
+                                                Everyone
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="group-activity-visibility" value="followers">
+                                                Followers
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="group-activity-visibility" value="only-you">
+                                                Only You
+                                            </label>
+                                            <p class="who-can-see-description">Your recipes will be visible to
+                                                anyone on FitFuel.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="privacy-item">
+                                        <div class="privacy-info">
+                                            <label class="privacy-label">Mentions</label>
+                                            <p class="privacy-description">Choose who can mention you and tag your
+                                                account. <a href="#" class="learn-more-link">Learn More.</a></p>
+                                        </div>
+                                        <div class="who-can-see-box">
+                                            <label class="radio-option">
+                                                <input type="radio" name="mentions-visibility" value="everyone" checked>
+                                                Everyone
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="mentions-visibility" value="followers">
+                                                Followers
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="mentions-visibility" value="only-you">
+                                                Only You
+                                            </label>
+                                            <p class="who-can-see-description">There are no restrictions on who can
+                                                mention you.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button type="button" class="btn btn-primary" id="save-privacy-btn">Save
+                                    Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+
+            <div class="auth-tabs">
+                <button class="tab-button active" data-tab="signin">Sign In</button>
+                <button class="tab-button" data-tab="signup">Create Account</button>
+            </div>
+
+
+            <div class="tab-content active" id="signin-tab">
+                <h2>Sign In</h2>
+
+                <form id="signin-form">
+                    <div class="form-group">
+                        <label for="signin-email">Email</label>
+                        <input type="email" id="signin-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" id="signin-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" id="switch-to-signup">No account? Create one →</a>
+                </div>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+
+                <div class="social-login">
+                    <button class="btn btn-social btn-google" id="google-signin">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+                    <button class="btn btn-social btn-apple" id="apple-signin">
+                        <i class="fab fa-apple"></i>
+                        Continue with Apple
+                    </button>
+
+                </div>
+                <div class="auth-links">
+                </div>
+            </div>
+
+
+            <div class="tab-content" id="signup-tab">
+                <h2>Create Account</h2>
+
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Username</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/feed.js"></script>
+    <script src="js/activity.js"></script>
+    <script src="js/recipe-view.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/recipe.js"></script>
+    <script src="js/manual_recipe.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
