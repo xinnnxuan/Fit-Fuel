@@ -18,9 +18,18 @@ const config = require("./config");
 const app = express();
 
 mongoose
-  .connect(config.MONGO_URI)
+  .connect(config.MONGO_URI, {
+    serverSelectionTimeoutMS: 30000, // 30 seconds
+    socketTimeoutMS: 45000, // 45 seconds
+    connectTimeoutMS: 30000, // 30 seconds
+    retryWrites: true,
+    w: "majority",
+  })
   .then(() => console.log("MongoDB connected successfully"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    console.error("Connection string (masked):", config.MONGO_URI ? config.MONGO_URI.replace(/\/\/[^:]+:[^@]+@/, "//***:***@") : "NOT SET");
+  });
 
 app.set("trust proxy", 1);
 
